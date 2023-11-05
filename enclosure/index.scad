@@ -1,11 +1,12 @@
 include <base.scad>;
+include <plate.scad>;
 
 width = 100;
 length = 50;
 thickness = 3;
 
 base_height = 25;
-plate_height = 5;
+plate_height = 2;
 height = base_height + plate_height;
 
 corner_radius = 3;
@@ -20,4 +21,4 @@ screw_offest = 5;
 
 fn = 100;
 
-base();
+plate();
