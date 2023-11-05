@@ -16,7 +16,7 @@ usb_mount_diameter = 12;
 screw_diameter = 3;
 screw_head_diameter = 4;
 screw_head_height = 2;
-screw_offest = 4;
+screw_offest = 5;
 
 fn = 100;
 
