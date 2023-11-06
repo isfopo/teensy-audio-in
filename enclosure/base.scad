@@ -3,6 +3,7 @@ use <rounded_cube.scad>;
 
 module base()
 {
+	jack_spacing = length / 2.5;
 	difference()
 	{
 		union()
@@ -13,7 +14,11 @@ module base()
 			screw_mounts([ width + (thickness * 2) - screw_offest, length + (thickness * 2) - screw_offest ]);
 			screw_mounts([ width + (thickness * 2) - screw_offest, screw_offest ]);
 		}
-		mount_hole(diameter = usb_mount_diameter);
+		mount_hole(diameter = usb_mount_diameter, location = "left", offset = (length / 2) + thickness);
+		mount_hole(diameter = jack_mount_diameter, location = "right",
+		           offset = ((length / 2) + thickness) + jack_spacing / 2);
+		mount_hole(diameter = jack_mount_diameter, location = "right",
+		           offset = ((length / 2) + thickness) - jack_spacing / 2);
 	}
 
 	module body()
@@ -41,10 +46,12 @@ module base()
 
 	module mount_hole(diameter = 3, location = "front", offset = width / 2)
 	{
-		x = (location == "front" || location == "back") ? offset : thickness / 2;
-		y = (location == "left" || location == "right") ? offset : thickness / 2;
-		translate([ x, y, base_height / 2 ])
-		rotate([ -90, 0, (location == "left" || location == "right") ? 90 : 0 ])
-		cylinder(d = diameter, h = thickness * 2, center = true, $fn = fn);
+		front_or_back = (location == "front" || location == "back");
+		left_or_right = (location == "left" || location == "right");
+		x = front_or_back ? offset : location == "left" ? 0 : width + thickness;
+		y = left_or_right ? offset : location == "front" ? 0 : height + thickness;
+		translate([ x, y, (base_height / 2) + thickness ])
+		rotate([ front_or_back ? -90 : 90, 0, (location == "left" || location == "right") ? 90 : 0 ])
+		cylinder(d = diameter, h = thickness, $fn = fn);
 	}
 }
