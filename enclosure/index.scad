@@ -12,7 +12,7 @@ height = base_height + plate_height;
 corner_radius = 3;
 
 jack_mount_diameter = 10;
-usb_mount_diameter = 20;
+usb_mount_diameter = 24;
 
 screw_diameter = 2;
 screw_head_diameter = 6;
@@ -21,4 +21,6 @@ screw_offest = 5;
 
 fn = 100;
 
-plate();
+base();
+
+//plate();
